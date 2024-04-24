@@ -1,0 +1,145 @@
+@using WebApi.Models
+@model NETCORE.Models.LoginModel
+@inject IconCaptcha.IconCaptchaService IconCaptcha
+@{
+    Layout = null;
+    ViewData["Page"] = "LOGIN";
+    ViewData["Site"] = "NETCORE";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Page"] - @ViewData["Site"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="~/Theme/ASPSTUDIO/dist/assets/css/vendor.min.css" rel="stylesheet">
+    <link href="~/Theme/ASPSTUDIO/dist/assets/css/app.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/bower_components/Ionicons/css/ionicons.min.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/dist/css/AdminLTE.min.css" />
+    <link rel="stylesheet" href="~/css/css2.css">
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/dist/css/additional.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/dist/css/new_login_style.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/new-login-assets/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/Theme/RFQ/sweetalert2.min.css">
+    <link rel="stylesheet" href="~/css/icon-captcha.min.css">
+
+    <script src="~/Theme/RFQ/new-login-assets/toastr/jquery.min.js"></script>
+    <script src="~/Theme/RFQ/new-login-assets/toastr/toastr.min.js"></script>
+    <script src="~/Theme/RFQ/sweetalert2.min.js"></script>
+    <script src="~/js/icon-captcha.min.js"></script>
+
+    <script>
+        function showError(message) {
+            toastr["error"](message + "");
+        }
+        function showWarning(message) {
+            toastr["warning"](message + "");
+        }
+        function showSuccess(message) {
+            toastr["success"](message + "");
+        }
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey === true) {
+                e.preventDefault();
+            }
+        });
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+    </script>
+</head>
+<body>
+    <div id="app" class="app app-full-height app-without-header">
+        <div class="login">
+            <div class="login-content">
+
+                @using (Html.BeginForm("Authenticate", "User", FormMethod.Post, new { id = "authenticationForm" }))
+                {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h1 class="text-center">Sign In</h1>
+                <div class="text-muted text-center mb-4">
+                    For your protection, please verify your identity.
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Username, new { htmlAttributes = new { @class = "form-label" } })
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control form-control-lg fs-15px", placeholder = "Enter your valid username", autocomplete = "off" } })
+                </div>
+
+                <div class="mb-3">
+                    <div class="d-flex">
+                        @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "form-label" } })
+                        <a href="#" class="ms-auto text-muted">Forgot password?</a>
+                    </div>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control form-control-lg fs-15px", placeholder = "Enter your valid password", autocomplete = "off" })
+                </div>
+
+
+                <input type="hidden" name="_iconcaptcha-token" value="@IconCaptcha.Token()" />
+                <div class="iconcaptcha-holder" data-theme="light"></div>
+                <br />
+                <button type="submit" class="btn btn-theme btn-lg d-block w-100 fw-500 mb-3">Sign In</button>
+                }
+            </div>
+        </div>
+        <a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+    </div>
+
+    <script src="~/Theme/ASPSTUDIO/dist/assets/js/vendor.min.js"></script>
+    <script src="~/Theme/ASPSTUDIO/dist/assets/js/app.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.iconcaptcha-holder').iconCaptcha({
+                general: {
+                    // validationPath: '/NETCORE/iconcaptcha',
+                    validationPath: '/iconcaptcha',
+                    fontFamily: 'Poppins',
+                    credits: 'show',
+                },
+                security: {
+                    clickDelay: 500,
+                    hoverDetection: true,
+                    enableInitialMessage: true,
+                    initializeDelay: 500,
+                    selectionResetDelay: 3000,
+                    loadingAnimationDelay: 1000,
+                    invalidateTime: 1000 * 60 * 2,
+                },
+                messages: {
+                    initialization: {
+                        verify: 'Verify that you are human.',
+                        loading: 'Loading challenge...',
+                    },
+                    header: "Select image which have less of amount.",
+                    correct: 'Verification complete.',
+                    incorrect: {
+                        title: 'Uh oh.',
+                        subtitle: "You've selected the wrong image."
+                    },
+                    timeout: {
+                        title: 'Please wait 60 sec.',
+                        subtitle: 'You made too many incorrect selections.'
+                    }
+                }
+            })
+        });
+        function showAlert(type, message) {
+            Swal.fire({
+                position: "center",
+                icon: type,
+                title: message,
+                showConfirmButton: false,
+                timer: 1000
+            });
+        }
+    </script>
+</body>
+</html>

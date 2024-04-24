@@ -1,0 +1,201 @@
+@{
+    var AppInfo = ViewBag.AppInfo;
+    var userInfo = ViewBag.userInfo;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="../../">
+    <meta charset="utf-8" />
+    <meta name="author" content="PT SHIMANO BATAM">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <link rel="shortcut icon" href="~/Theme/DASHLITE/demo1/src/images/favicon.png">
+    <link rel="stylesheet" href="~/Theme/DASHLITE/demo1/src/assets/css/dashlite.css">
+    <link rel="stylesheet" href="~/Theme/DASHLITE/demo1/src/assets/css/theme.css">
+    <link id="skin-default" rel="stylesheet" href="~/Theme/DASHLITE/demo1/src/assets/css/skins/theme-blue.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @AppInfo?.Name</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
+<body class="nk-body bg-lighter npc-general has-sidebar">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <div class="nk-sidebar nk-sidebar-fixed is-theme" data-content="sidebarMenu">
+                <div class="nk-sidebar-element nk-sidebar-head">
+                    <div class="nk-menu-trigger">
+                        <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="icon ni ni-arrow-left"></em></a>
+                        <a href="#" class="nk-nav-compact nk-quick-nav-icon d-none d-xl-inline-flex" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                    </div>
+                    <div class="nk-sidebar-brand">
+                        <a href="~/" class="logo-link nk-sidebar-logo">
+                            <h6 style="color:white">@AppInfo?.Name</h6>
+                            <h6 style="color:white; font-size:8px">[@AppInfo?.Version]</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="nk-sidebar-element nk-sidebar-body">
+                    <div class="nk-sidebar-content">
+                        <div class="nk-sidebar-menu" data-simplebar>
+                            <ul class="nk-menu" id="MenuList">
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-wrap ">
+                <div class="nk-header nk-header-fixed is-theme">
+                    <div class="container-fluid">
+                        <div class="nk-header-wrap">
+                            <div class="nk-menu-trigger d-xl-none ms-n1">
+                                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+                            </div>
+                            <div class="nk-header-brand d-xl-none">
+                                <a href="html/index.html" class="logo-link">
+                                    <h6 style="color:white">@AppInfo?.Name</h6>
+                                    <h6 style="color:white; font-size:8px">[@AppInfo?.Version]</h6>
+                                </a>
+                            </div>
+                            <div class="nk-header-news d-none d-xl-block">
+                            </div>
+                            <div class="nk-header-tools">
+                                <ul class="nk-quick-nav">
+
+                                    <li class="dropdown user-dropdown">
+                                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                            <div class="user-toggle">
+                                                <div class="user-avatar sm">
+                                                    <em class="icon ni ni-user-alt"></em>
+                                                </div>
+                                                <div class="user-info d-none d-md-block">
+                                                    <div class="user-name">@userInfo?.Name</div>
+                                                    <div class="user-name dropdown-indicator">@userInfo?.Department</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                                            <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                                <div class="user-card">
+                                                    <div class="user-avatar">
+                                                        <span>@ViewBag.INITIALS</span>
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <a>@userInfo?.Name</a>
+                                                        <a>@userInfo?.Department</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="dropdown-inner">
+                                                <ul class="link-list">
+                                                    <li><a class="dark-switch" href="#"><em class="icon ni ni-moon"></em><span>Dark Mode</span></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="dropdown-inner">
+                                                <ul class="link-list">
+                                                    <li><a href="@Url.Action("Logout", "User")"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nk-content ">
+                    <div class="container-fluid">
+                        <div class="nk-content-inner">
+                            <div class="nk-content-body">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nk-footer">
+                    <div class="container-fluid">
+                        <div class="nk-footer-wrap">
+                            <div class="nk-footer-copyright">
+                                <a>@AppInfo?.Footer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/bundle.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/scripts.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/charts/gd-default.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/charts/gd-analytics.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/charts/gd-invest.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/example-sweetalert.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/example-toastr.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/dual-listbox.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/jstree.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/example-tree.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/editors/quill.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/editors/summernote.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/editors/tinymce.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/editors.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/datatable-btns.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/fullcalendar.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/apps/calendar.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/jkanban.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/apps/kanban.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/jqvmap.js"></script>
+    <script src="~/Theme/DASHLITE/demo1/src/assets/js/libs/tagify.js"></script>
+    <script src="~/js/isotope.pkgd.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+
+        $(document).ready(function () {
+            GET_MENU_LIST();
+        });
+
+        function GET_MENU_LIST() {
+            var URL = "@Url.Action("GET_MENU_LIST", "MASTERDATA")";
+            $.ajax({
+                type: "POST",
+                url: URL,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var count = data.length;
+                    var html = '';
+                    for (let i = 0; i < count; i++) {
+                        if (data[i].PARENT === "AR") {
+                            html += `
+                                <li class="nk-menu-heading">
+                                    <h6 class="overline-title text-primary-alt">`+ data[i].NAME + `</h6>
+                                </li>
+                            `;
+                        }
+                        else {
+                            let url = `${data[i].CONTROLLER}/${data[i].ACTION}`;
+                            html += `
+                                <li class="nk-menu-item">
+                                    <a href="${url}" class="nk-menu-link">
+                                        <span class="nk-menu-icon"><em class="`+ data[i].ICON + `"></em></span>
+                                        <span class="nk-menu-text">`+ data[i].NAME + `</span>
+                                    </a>
+                                </li>
+                            `;
+                        }
+                    }
+                    $('#MenuList').append(html);
+                },
+                error: function (request, status, error) {
+
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
